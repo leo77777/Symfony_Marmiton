@@ -49,6 +49,11 @@ class Recettes
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Compose::class, mappedBy="recette")
+     */
+    private $composes;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
@@ -56,6 +61,7 @@ class Recettes
         $this->commentaires = new ArrayCollection();
         $this->photos = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->composes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +228,37 @@ class Recettes
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
             $category->removeRecette($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Compose[]
+     */
+    public function getComposes(): Collection
+    {
+        return $this->composes;
+    }
+
+    public function addCompose(Compose $compose): self
+    {
+        if (!$this->composes->contains($compose)) {
+            $this->composes[] = $compose;
+            $compose->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompose(Compose $compose): self
+    {
+        if ($this->composes->contains($compose)) {
+            $this->composes->removeElement($compose);
+            // set the owning side to null (unless already changed)
+            if ($compose->getRecette() === $this) {
+                $compose->setRecette(null);
+            }
         }
 
         return $this;

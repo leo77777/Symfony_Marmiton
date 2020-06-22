@@ -7,6 +7,8 @@ use App\Entity\Note;
 use App\Entity\Photos;
 use App\Entity\Etapes;
 use App\Entity\Categories;
+use App\Entity\Commentaires;
+use App\Entity\Ingredients;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -16,16 +18,69 @@ class RecettesFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
+        // CREATION DE CATEGORIES
         $categorie1 = new Categories();
         $categorie1->setNomCategorie('dessert');
         $manager->persist($categorie1);  
         $categorie2 = new Categories();
-        $categorie2->setNomCategorie('soupe');
+        $categorie2->setNomCategorie('plat principal');
         $manager->persist($categorie2);  
         $categorie3 = new Categories();
-        $categorie3->setNomCategorie('plat principal');
-        $manager->persist($categorie3);  
+        $categorie3->setNomCategorie('entrée');
+        $manager->persist($categorie3);
+        $categorie4 = new Categories();
+        $categorie4->setNomCategorie('soupe');
+        $manager->persist($categorie4);
+        $categorie5 = new Categories();        
+        $categorie5->setNomCategorie('tarte');
+        $manager->persist($categorie5);
+        $categorie6 = new Categories();
+        $categorie6->setNomCategorie('cuisine asiatique');
+        $manager->persist($categorie6);
+        $categorie7 = new Categories();
+        $categorie7->setNomCategorie('purée');
+        $manager->persist($categorie7);  
+        $categorie8 = new Categories();
+        $categorie8->setNomCategorie('légumes');
+        $manager->persist($categorie8);  
+        $categorie9 = new Categories();    
+        $categorie9->setNomCategorie('sauce');
+        $manager->persist($categorie9); 
+        $categorie10 = new Categories(); 
+        $categorie10->setNomCategorie('viande');
+        $manager->persist($categorie10);  
 
+        // CREATION D INGREDIENTS
+        $ingredient1 = new Ingredients();
+        $ingredient1->setNomIngredient("ingredient1");
+        $ingredient1->setCouleur('rouge');
+        $manager->persist($ingredient1); 
+        $ingredient2 = new Ingredients();
+        $ingredient2->setNomIngredient("ingredient2");
+        $ingredient2->setCouleur('vert');
+        $manager->persist($ingredient2); 
+        $ingredient3 = new Ingredients();
+        $ingredient3->setNomIngredient("ingredient3");
+        $ingredient3->setCouleur('rouge');
+        $manager->persist($ingredient3); 
+        $ingredient4 = new Ingredients();
+        $ingredient4->setNomIngredient("ingredient4");
+        $ingredient4->setCouleur('rouge');
+        $manager->persist($ingredient4); 
+        $ingredient5 = new Ingredients();
+        $ingredient5->setNomIngredient("ingredient5");
+        $ingredient5->setCouleur('rouge');
+        $manager->persist($ingredient5); 
+        $ingredient6 = new Ingredients();
+        $ingredient6->setNomIngredient("ingredient6");
+        $ingredient6->setCouleur('rouge');
+        $manager->persist($ingredient6); 
+        $ingredient7 = new Ingredients();
+        $ingredient7->setNomIngredient("ingredient7");
+        $ingredient7->setCouleur('rouge');
+        $manager->persist($ingredient7); 
+          
+        //
         $recette1 = new Recettes();
         $recette1->addCategory($categorie2);
         $recette1->addCategory($categorie3);
@@ -62,11 +117,27 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape('Démouler et servir avec de la mayonnaise au citron');
         $etape->setRecette($recette1);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("bon");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Rere");
+        $commentaire->setRecette($recette1);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("tres bon");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Vyvy");
+        $commentaire->setRecette($recette1);
+        $manager->persist($commentaire);
 
 
 
 
         $recette2 = new Recettes();
+        $recette2->addCategory($categorie4);
+        $recette2->addCategory($categorie8);
         $recette2->setNomRecette("Soupe de cresson");
         $manager->persist($recette2);
         for ($i = 1; $i <= 10; $i++) {
@@ -100,10 +171,26 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Laisser le cresson ramollir et ajouter l'eau et le bouillon cube. Il faut que l'eau recouvre les légumes d'au moins 2 doig");
         $etape->setRecette($recette2);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("moyen");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Vyvy");
+        $commentaire->setRecette($recette2);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("fameux");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Tina");
+        $commentaire->setRecette($recette2);
+        $manager->persist($commentaire);
         
 
 
         $recette3= new Recettes();
+        $recette3->addCategory($categorie1);
+        $recette3->addCategory($categorie5);
         $recette3->setNomRecette("Mousse au chocolat");
         $manager->persist($recette3);
         for ($i = 1; $i <= 10; $i++) {
@@ -137,9 +224,25 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Mettre au frais 2h minimum.");
         $etape->setRecette($recette3);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("moyen");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Byby");
+        $commentaire->setRecette($recette3);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("bon");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Tina");
+        $commentaire->setRecette($recette3);
+        $manager->persist($commentaire);
 
 
         $recette4 = new Recettes();
+        $recette4->addCategory($categorie2);
+        $recette4->addCategory($categorie8);
         $recette4->setNomRecette("Carottes vichy");
         $manager->persist($recette4);
         for ($i = 1; $i <= 10; $i++) {
@@ -173,9 +276,25 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Laisser à petit feu sans couvrir afin de permettre à l'eau de s'évaporer pendant 20/25 minutes.");
         $etape->setRecette($recette4);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("succulent");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Keke");
+        $commentaire->setRecette($recette4);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("fameux");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Mirti");
+        $commentaire->setRecette($recette4);
+        $manager->persist($commentaire);
 
 
         $recette5 = new Recettes();
+        $recette5->addCategory($categorie7);
+        $recette5->addCategory($categorie1);
         $recette5->setNomRecette("Compote pomme banane");
         $manager->persist($recette5);
         for ($i = 1; $i <= 10; $i++) {
@@ -209,8 +328,24 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Remuer régulièrement et rajouter de l'eau si besoin.");
         $etape->setRecette($recette5);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("a voir");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Mibo");
+        $commentaire->setRecette($recette5);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("excellent");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Tina");
+        $commentaire->setRecette($recette5);
+        $manager->persist($commentaire);
 
         $recette6 = new Recettes();
+        $recette6->addCategory($categorie2);
+        $recette6->addCategory($categorie6);
         $recette6->setNomRecette("Riz contonais");
         $manager->persist($recette6);
         for ($i = 1; $i <= 10; $i++) {
@@ -234,10 +369,26 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Faire une omelette et la couper en lanières");
         $etape->setRecette($recette6);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("incroyable");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Hera");
+        $commentaire->setRecette($recette6);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("bien");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Jeti");
+        $commentaire->setRecette($recette6);
+        $manager->persist($commentaire);
 
 
 
         $recette7 = new Recettes();
+        $recette7->addCategory($categorie2);
+        $recette7->addCategory($categorie3);
         $recette7->setNomRecette("Sushis");
         $manager->persist($recette7);
         for ($i = 1; $i <= 10; $i++) {
@@ -266,6 +417,20 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Couper le rouleau en petites bouchées, et servir en apéritif.");
         $etape->setRecette($recette7);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("fameux");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Vyvy");
+        $commentaire->setRecette($recette7);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("tres bon");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Tina");
+        $commentaire->setRecette($recette7);
+        $manager->persist($commentaire);
 
 
 
@@ -273,6 +438,8 @@ class RecettesFixtures extends Fixture
 
 
         $recette8 = new Recettes();
+        $recette8->addCategory($categorie2);
+        $recette8->addCategory($categorie8);
         $recette8->setNomRecette("Purée de blettes");
         $manager->persist($recette8);
         for ($i = 1; $i <= 10; $i++) {
@@ -301,9 +468,25 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Bien mélanger, soit au mixer, soit écraser avec une spatule.");
         $etape->setRecette($recette8);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("hum...");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Syla");
+        $commentaire->setRecette($recette8);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("oh la !");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Cety");
+        $commentaire->setRecette($recette8);
+        $manager->persist($commentaire);
 
 
         $recette9 = new Recettes();
+        $recette9->addCategory($categorie5);
+        $recette9->addCategory($categorie1);
         $recette9->setNomRecette("Tarte tatin");
         $manager->persist($recette9);
         for ($i = 1; $i <= 10; $i++) {
@@ -332,9 +515,25 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Saupoudrer les pommes de sucre vanillé et de cannelle.");
         $etape->setRecette($recette9);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("super");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Vyvy");
+        $commentaire->setRecette($recette9);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("a gouter !");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Tina");
+        $commentaire->setRecette($recette9);
+        $manager->persist($commentaire);
 
 
         $recette10 = new Recettes();
+        $recette10->addCategory($categorie3);
+        $recette10->addCategory($categorie8);
         $recette10->setNomRecette("Salade vietnamienne");
         $manager->persist($recette10);
         for ($i = 1; $i <= 10; $i++) {
@@ -363,6 +562,20 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Verser sur les légumes au dernier moment, juste avant de servir.");
         $etape->setRecette($recette10);
         $manager->persist($etape);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("le meilleur");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Vyvy");
+        $commentaire->setRecette($recette10);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("japonisant");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Hiki");
+        $commentaire->setRecette($recette10);
+        $manager->persist($commentaire);
 
         $manager->flush();
     }

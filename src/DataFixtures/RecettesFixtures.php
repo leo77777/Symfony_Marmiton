@@ -9,6 +9,7 @@ use App\Entity\Etapes;
 use App\Entity\Categories;
 use App\Entity\Commentaires;
 use App\Entity\Ingredients;
+use App\Entity\Compose;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -52,39 +53,69 @@ class RecettesFixtures extends Fixture
 
         // CREATION D INGREDIENTS
         $ingredient1 = new Ingredients();
-        $ingredient1->setNomIngredient("ingredient1");
-        $ingredient1->setCouleur('rouge');
+        $ingredient1->setNomIngredient("asperge")
+                    ->setCouleur('vert');
         $manager->persist($ingredient1); 
         $ingredient2 = new Ingredients();
-        $ingredient2->setNomIngredient("ingredient2");
-        $ingredient2->setCouleur('vert');
+        $ingredient2->setNomIngredient("tomate")
+                    ->setCouleur('rouge');
         $manager->persist($ingredient2); 
         $ingredient3 = new Ingredients();
-        $ingredient3->setNomIngredient("ingredient3");
-        $ingredient3->setCouleur('rouge');
+        $ingredient3->setNomIngredient("blette")   
+                    ->setCouleur('vert');
         $manager->persist($ingredient3); 
         $ingredient4 = new Ingredients();
-        $ingredient4->setNomIngredient("ingredient4");
-        $ingredient4->setCouleur('rouge');
+        $ingredient4->setNomIngredient("ingredient4")       
+                    ->setCouleur('rouge');
         $manager->persist($ingredient4); 
         $ingredient5 = new Ingredients();
-        $ingredient5->setNomIngredient("ingredient5");
-        $ingredient5->setCouleur('rouge');
+        $ingredient5->setNomIngredient("ingredient5")
+                    ->setCouleur('rouge');
         $manager->persist($ingredient5); 
         $ingredient6 = new Ingredients();
-        $ingredient6->setNomIngredient("ingredient6");
-        $ingredient6->setCouleur('rouge');
+        $ingredient6->setNomIngredient("ingredient6")
+                    ->setCouleur('rouge');
         $manager->persist($ingredient6); 
         $ingredient7 = new Ingredients();
-        $ingredient7->setNomIngredient("ingredient7");
-        $ingredient7->setCouleur('rouge');
+        $ingredient7->setNomIngredient("ingredient7")
+                    ->setCouleur('rouge');
         $manager->persist($ingredient7); 
+        $ingredient8 = new Ingredients();
+        $ingredient8->setNomIngredient("ingredient8")
+                    ->setCouleur('rouge');
+        $manager->persist($ingredient8);
+        $ingredient9 = new Ingredients();
+        $ingredient9->setNomIngredient("ingredient9")
+                    ->setCouleur('orange');
+        $manager->persist($ingredient9);
+        $ingredient10 = new Ingredients();
+        $ingredient10->setNomIngredient("ingredient10")
+                    ->setCouleur('violet');
+        $manager->persist($ingredient10);
           
-        //
+        //        ***** RECETTE 1 *****
         $recette1 = new Recettes();
-        $recette1->addCategory($categorie2);
-        $recette1->addCategory($categorie3);
-        $recette1->setNomRecette("Mousse d'asperge");        
+
+        $compose = new Compose();
+        $compose->setRecette($recette1)
+                ->setIngredient($ingredient1)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette1)
+                ->setIngredient($ingredient2)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette1)
+                ->setIngredient($ingredient7)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
+        $recette1->addCategory($categorie2)
+                 ->addCategory($categorie3)
+                 ->setNomRecette("Mousse d'asperge"); 
+
         $manager->persist($recette1);
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
@@ -92,103 +123,144 @@ class RecettesFixtures extends Fixture
             $note->setRecette($recette1);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
-        $photo->setChampAlternatif('Mousse asperge');
-        $photo->setLien('\images\mousseAsperge.jpg');
-        $photo->setRecette($recette1);
+        $photo->setChampAlternatif('Mousse asperge')    
+                ->setLien('\images\mousseAsperge.jpg')
+                ->setRecette($recette1);
         $manager->persist($photo); 
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
-        $etape->setDescriptionEtape('Préparer un paquet de gelée Maggi avec 1/4 l d’eau. Eplucher 1 kg d’asperges fraîches, garder les parties tendres, faire cuire 20 min à l’eau bouillante salée');
-        $etape->setRecette($recette1);
+        $etape->setDescriptionEtape('Préparer un paquet de gelée Maggi avec 1/4 l d’eau. Eplucher 1 kg d’asperges fraîches, garder les parties tendres, faire cuire 20 min à l’eau bouillante salée')
+                ->setRecette($recette1);
         $manager->persist($etape);
         $etape = new Etapes();
         $etape->setNumEtape(2);
-        $etape->setDescriptionEtape('Mixer les asperges, ajouter 100 g de vache qui rit, un pot de crème fraîche, sel, poivre, le jus d’un citron, éventuellement du Tabasco');
-        $etape->setRecette($recette1);
+        $etape->setDescriptionEtape('Mixer les asperges, ajouter 100 g de vache qui rit, un pot de crème fraîche, sel, poivre, le jus d’un citron, éventuellement du Tabasco')
+                ->setRecette($recette1);
         $manager->persist($etape);
         $etape = new Etapes();
         $etape->setNumEtape(3);
-        $etape->setDescriptionEtape('Dans un moule à cake ou à charlotte, verser la préparation, mettre au réfrigérateur une nuit');
-        $etape->setRecette($recette1);
+        $etape->setDescriptionEtape('Dans un moule à cake ou à charlotte, verser la préparation, mettre au réfrigérateur une nuit')
+                ->setRecette($recette1);
         $manager->persist($etape);
         $etape = new Etapes();
         $etape->setNumEtape(4);
-        $etape->setDescriptionEtape('Démouler et servir avec de la mayonnaise au citron');
-        $etape->setRecette($recette1);
+        $etape->setDescriptionEtape('Démouler et servir avec de la mayonnaise au citron')
+                ->setRecette($recette1);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
-        $commentaire->setLibelleCommentaire("bon");
-        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
-        $commentaire->setValide(true);
-        $commentaire->setPseudo("Rere");
-        $commentaire->setRecette($recette1);
+        $commentaire->setLibelleCommentaire("bon")
+                    ->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'))
+                    ->setValide(true)
+                    ->setPseudo("Rere")
+                    ->setRecette($recette1);
         $manager->persist($commentaire);
         $commentaire = new Commentaires();
-        $commentaire->setLibelleCommentaire("tres bon");
-        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
-        $commentaire->setValide(true);
-        $commentaire->setPseudo("Vyvy");
-        $commentaire->setRecette($recette1);
+        $commentaire->setLibelleCommentaire("tres bon")
+                    ->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ))
+                    ->setValide(true)
+                    ->setPseudo("Vyvy")
+                    ->setRecette($recette1);
         $manager->persist($commentaire);
 
 
 
-
+        //        ***** RECETTE 2 *****
         $recette2 = new Recettes();
-        $recette2->addCategory($categorie4);
-        $recette2->addCategory($categorie8);
-        $recette2->setNomRecette("Soupe de cresson");
+
+        $compose = new Compose();
+        $compose->setRecette($recette2)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette2)
+                ->setIngredient($ingredient10)
+                ->setQteUnePersonne("70g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette2)
+                ->setIngredient($ingredient3)
+                ->setQteUnePersonne("400g");
+        $manager->persist($compose); 
+
+        $recette2->addCategory($categorie4)
+                 ->addCategory($categorie8)
+                 ->setNomRecette("Soupe de cresson");
         $manager->persist($recette2);
+
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
-            $note->setNote($faker->numberBetween($min=0, $max=20));
-            $note->setRecette($recette2);
+            $note->setNote($faker->numberBetween($min=0, $max=20))
+                 ->setRecette($recette2);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
-        $photo->setChampAlternatif('Soupe de cresson');
-        $photo->setLien('\images\soupeCresson.jpg');
-        $photo->setRecette($recette2);
+        $photo->setChampAlternatif('Soupe de cresson')
+              ->setLien('\images\soupeCresson.jpg')
+              ->setRecette($recette2);
         $manager->persist($photo);
+
         $etape = new Etapes();
-        $etape->setNumEtape(1);
-        $etape->setDescriptionEtape('Laver, nettoyer le cresson pour enlever les trop grosses tiges.');
-        $etape->setRecette($recette2);
+        $etape->setNumEtape(1)
+              ->setDescriptionEtape('Laver, nettoyer le cresson pour enlever les trop grosses tiges.')
+              ->setRecette($recette2);
         $manager->persist($etape);
         $etape = new Etapes();
-        $etape->setNumEtape(2);
-        $etape->setDescriptionEtape('Eplucher les pommes de terre, et les détailler en cubes.');
-        $etape->setRecette($recette2);
+        $etape->setNumEtape(2)
+               ->setDescriptionEtape('Eplucher les pommes de terre, et les détailler en cubes.')
+               ->setRecette($recette2);
         $manager->persist($etape);
         $etape = new Etapes();
         $etape->setNumEtape(3);
-        $etape->setDescriptionEtape("Dans une grande casserole, mettre le beurre à chauffer. Lorsqu'il commence à grésiller (sans brûler), ajouter le cresson, les pommes de terre, l'échalote hachée grossièrement et le thym.");
-        $etape->setRecette($recette2);
+        $etape->setDescriptionEtape("Dans une grande casserole, mettre le beurre à chauffer. Lorsqu'il commence à grésiller (sans brûler), ajouter le cresson, les pommes de terre, l'échalote hachée grossièrement et le thym.")
+              ->setRecette($recette2);
         $manager->persist($etape);
         $etape = new Etapes();
         $etape->setNumEtape(4);
-        $etape->setDescriptionEtape("Laisser le cresson ramollir et ajouter l'eau et le bouillon cube. Il faut que l'eau recouvre les légumes d'au moins 2 doig");
-        $etape->setRecette($recette2);
+        $etape->setDescriptionEtape("Laisser le cresson ramollir et ajouter l'eau et le bouillon cube. Il faut que l'eau recouvre les légumes d'au moins 2 doig")
+              ->setRecette($recette2);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
-        $commentaire->setLibelleCommentaire("moyen");
-        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
-        $commentaire->setValide(true);
-        $commentaire->setPseudo("Vyvy");
-        $commentaire->setRecette($recette2);
+        $commentaire->setLibelleCommentaire("moyen")
+                    ->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'))
+                    ->setValide(true)
+                    ->setPseudo("Vyvy")
+                    ->setRecette($recette2);
         $manager->persist($commentaire);
         $commentaire = new Commentaires();
-        $commentaire->setLibelleCommentaire("fameux");
-        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
-        $commentaire->setValide(false);
-        $commentaire->setPseudo("Tina");
-        $commentaire->setRecette($recette2);
+        $commentaire->setLibelleCommentaire("fameux")
+                    ->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false)
+                    ->setPseudo("Tina")
+                    ->setRecette($recette2);
         $manager->persist($commentaire);
         
 
-
+        //        ***** RECETTE 3 *****
         $recette3= new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette3)
+                ->setIngredient($ingredient2)
+                ->setQteUnePersonne("400g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette3)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("10g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette3)
+                ->setIngredient($ingredient9)
+                ->setQteUnePersonne("120g");
+        $manager->persist($compose); 
+
         $recette3->addCategory($categorie1);
         $recette3->addCategory($categorie5);
         $recette3->setNomRecette("Mousse au chocolat");
@@ -199,11 +271,13 @@ class RecettesFixtures extends Fixture
             $note->setRecette($recette3);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Mousse au chocolat');
         $photo->setLien('\images\mousseChocolat.jpg');
         $photo->setRecette($recette3);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Séparer les blancs des jaunes d'oeufs.");
@@ -224,6 +298,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Mettre au frais 2h minimum.");
         $etape->setRecette($recette3);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("moyen");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -239,23 +314,43 @@ class RecettesFixtures extends Fixture
         $commentaire->setRecette($recette3);
         $manager->persist($commentaire);
 
-
+        //        ***** RECETTE 4 *****
         $recette4 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette4)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("500g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette4)
+                ->setIngredient($ingredient1)
+                ->setQteUnePersonne("110g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette4)
+                ->setIngredient($ingredient2)
+                ->setQteUnePersonne("4g");
+        $manager->persist($compose); 
+
         $recette4->addCategory($categorie2);
         $recette4->addCategory($categorie8);
         $recette4->setNomRecette("Carottes vichy");
         $manager->persist($recette4);
+
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
             $note->setNote($faker->numberBetween($min=0, $max=20));
             $note->setRecette($recette4);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Carottes vichy');
         $photo->setLien('\images\carottesVichy.jpg');
         $photo->setRecette($recette4);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Eplucher (gratter) les carottes et couper-les en petites rondelles");
@@ -276,6 +371,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Laisser à petit feu sans couvrir afin de permettre à l'eau de s'évaporer pendant 20/25 minutes.");
         $etape->setRecette($recette4);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("succulent");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -291,23 +387,43 @@ class RecettesFixtures extends Fixture
         $commentaire->setRecette($recette4);
         $manager->persist($commentaire);
 
-
+        //        ***** RECETTE 5 *****
         $recette5 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette5)
+                ->setIngredient($ingredient2)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette5)
+                ->setIngredient($ingredient3)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette5)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
         $recette5->addCategory($categorie7);
         $recette5->addCategory($categorie1);
         $recette5->setNomRecette("Compote pomme banane");
-        $manager->persist($recette5);
+        $manager->persist($recette5)
+        ;
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
             $note->setNote($faker->numberBetween($min=0, $max=20));
             $note->setRecette($recette5);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Compote pomme banane');
         $photo->setLien('\images\compotePommeBanane.jpg');
         $photo->setRecette($recette5);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Eplucher les pommes et les couper en petits dés.");
@@ -328,6 +444,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Remuer régulièrement et rajouter de l'eau si besoin.");
         $etape->setRecette($recette5);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("a voir");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -343,22 +460,44 @@ class RecettesFixtures extends Fixture
         $commentaire->setRecette($recette5);
         $manager->persist($commentaire);
 
+
+        //        ***** RECETTE 6 *****
         $recette6 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette6)
+                ->setIngredient($ingredient1)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette6)
+                ->setIngredient($ingredient2)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette6)
+                ->setIngredient($ingredient8)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
         $recette6->addCategory($categorie2);
         $recette6->addCategory($categorie6);
         $recette6->setNomRecette("Riz contonais");
         $manager->persist($recette6);
+
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
             $note->setNote($faker->numberBetween($min=0, $max=20));
             $note->setRecette($recette6);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Riz contonais');
         $photo->setLien('\images\rizCantonais.jpg');
         $photo->setRecette($recette6);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Faire cuire le riz et le rincer à l'eau froide.");
@@ -369,6 +508,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Faire une omelette et la couper en lanières");
         $etape->setRecette($recette6);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("incroyable");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -385,23 +525,43 @@ class RecettesFixtures extends Fixture
         $manager->persist($commentaire);
 
 
-
+        //        ***** RECETTE 7 *****
         $recette7 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette7)
+                ->setIngredient($ingredient3)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette7)
+                ->setIngredient($ingredient6)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette7)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
         $recette7->addCategory($categorie2);
         $recette7->addCategory($categorie3);
         $recette7->setNomRecette("Sushis");
         $manager->persist($recette7);
+
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
             $note->setNote($faker->numberBetween($min=0, $max=20));
             $note->setRecette($recette7);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Sushis');
         $photo->setLien('\images\sushis.jpg');
         $photo->setRecette($recette7);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Poser la feuille de Nori à plat et la couper en deux.");
@@ -417,6 +577,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Couper le rouleau en petites bouchées, et servir en apéritif.");
         $etape->setRecette($recette7);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("fameux");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -433,26 +594,43 @@ class RecettesFixtures extends Fixture
         $manager->persist($commentaire);
 
 
-
-
-
-
+        //        ***** RECETTE 8 *****
         $recette8 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette8)
+                ->setIngredient($ingredient10)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette8)
+                ->setIngredient($ingredient7)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette8)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
         $recette8->addCategory($categorie2);
         $recette8->addCategory($categorie8);
         $recette8->setNomRecette("Purée de blettes");
         $manager->persist($recette8);
+
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
             $note->setNote($faker->numberBetween($min=0, $max=20));
             $note->setRecette($recette8);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Purée de blettes');
         $photo->setLien('\images\pureeDeBlettes.jpg');
         $photo->setRecette($recette8);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Mettre les pommes de terres et les blettes à cuire.");
@@ -468,6 +646,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Bien mélanger, soit au mixer, soit écraser avec une spatule.");
         $etape->setRecette($recette8);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("hum...");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -484,22 +663,43 @@ class RecettesFixtures extends Fixture
         $manager->persist($commentaire);
 
 
+        //        ***** RECETTE 9 *****
         $recette9 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette9)
+                ->setIngredient($ingredient1)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette9)
+                ->setIngredient($ingredient3)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette9)
+                ->setIngredient($ingredient7)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
         $recette9->addCategory($categorie5);
         $recette9->addCategory($categorie1);
         $recette9->setNomRecette("Tarte tatin");
         $manager->persist($recette9);
+
         for ($i = 1; $i <= 10; $i++) {
             $note = new Note();
             $note->setNote($faker->numberBetween($min=0, $max=20));
             $note->setRecette($recette9);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Tarte tatin');
         $photo->setLien('\images\tarteTatin.jpg');
         $photo->setRecette($recette9);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Eplucher les 8 pommes golden entières. ");
@@ -515,6 +715,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Saupoudrer les pommes de sucre vanillé et de cannelle.");
         $etape->setRecette($recette9);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("super");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
@@ -531,7 +732,25 @@ class RecettesFixtures extends Fixture
         $manager->persist($commentaire);
 
 
+        //        ***** RECETTE 10 *****
         $recette10 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette10)
+                ->setIngredient($ingredient2)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette10)
+                ->setIngredient($ingredient1)
+                ->setQteUnePersonne("150g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette10)
+                ->setIngredient($ingredient10)
+                ->setQteUnePersonne("40g");
+        $manager->persist($compose); 
+
         $recette10->addCategory($categorie3);
         $recette10->addCategory($categorie8);
         $recette10->setNomRecette("Salade vietnamienne");
@@ -542,11 +761,13 @@ class RecettesFixtures extends Fixture
             $note->setRecette($recette10);
             $manager->persist($note);                                    
         }
+
         $photo = new Photos();
         $photo->setChampAlternatif('Salade vietnamienne');
         $photo->setLien('\images\saladeVietnamienne.jpg');
         $photo->setRecette($recette10);
         $manager->persist($photo);
+
         $etape = new Etapes();
         $etape->setNumEtape(1);
         $etape->setDescriptionEtape("Emincer tous les légumes.");
@@ -562,6 +783,7 @@ class RecettesFixtures extends Fixture
         $etape->setDescriptionEtape("Verser sur les légumes au dernier moment, juste avant de servir.");
         $etape->setRecette($recette10);
         $manager->persist($etape);
+
         $commentaire = new Commentaires();
         $commentaire->setLibelleCommentaire("le meilleur");
         $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));

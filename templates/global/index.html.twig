@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SITE DU MON MARMITON{% endblock %}
+
+{% block body %}
+
+    <div class="row mx-auto text-center">
+        {% for key,recette in recettes %}
+            
+            <div class="col-md-6 col-lg-4 col-sm-12 mt-3 mb-3">
+                    <div class="card text-white bg-{{classeCouleur[key % 3]}} m-1" style="width: 18rem;">
+                        {% for photo in recette.photos %}
+                            <img src="{{photo.lien}}" class="card-img-top" style="height:200px" alt="{{photo.champAlternatif}}">
+                        {% endfor %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{recette.nomRecette}} </h5>
+                            <p class="card-text">Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+                                                    En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute</p>
+                            <a href="#" class="btn btn-{{classeCouleur[key % 3]}} border text-white">Recette ...</a>
+                        </div>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

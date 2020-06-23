@@ -11,7 +11,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#08374f">
-            <a class="navbar-brand" href="#">𝕸𝖔𝖓 𝕸𝖆𝖗𝖒𝖎𝖙𝖔𝖓 <img src="images/resto5.png" style="width:37px" alt=""></a>
+            <a class="navbar-brand" href="#">𝕸𝖔𝖓 𝕸𝖆𝖗𝖒𝖎𝖙𝖔𝖓 <img src="{{asset('/images/resto5.png')}}" style="width:37px" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,7 +19,10 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('accueil')}}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('listeRecettes')}}">Liste des recettes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Administration</a>
@@ -27,20 +30,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">A propos</a>
-                </li>
-                </ul>
-                <form method="get" action="" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Je cherche une recette ...">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Chercher</button>
+                </ul> 
+                <form method="get" action="{{ path('rechercheRecette2')}}" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" name="nomRecette" placeholder="Je cherche une recette ...">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Chercher</button>
                 </form>
             </div>
         </nav>
         
         <main class="container">                
             <h1 class="border border-dark rounded-circle text-black mt-5 mb-4 p-2 text-center bg-white" style="width:300px;"> 
-                {% block monTitre %}<img src="images/resto5.png" style="width:77px" alt=""> 𝔐𝔬𝔫 𝔐𝔞𝔯𝔪𝔦𝔱𝔬𝔫 {% endblock %} </h1>
+                {% block monTitre %}<img src="{{asset('/images/resto5.png')}}" style="width:77px" alt=""> 𝔐𝔬𝔫 𝔐𝔞𝔯𝔪𝔦𝔱𝔬𝔫 {% endblock %} </h1>
               
             {% block body %}{% endblock %}
         </main>

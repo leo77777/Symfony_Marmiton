@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RECETTES TROUVEES{% endblock %}
+{% block title %}SITE DU MON MARMITON{% endblock %}
 
 {% block body %}
 
@@ -16,7 +16,9 @@
                             <h5 class="card-title">{{recette.nomRecette}} </h5>
                             <p class="card-text">Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
                                                     En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute</p>
-                            <a href="#" class="btn btn-{{classeCouleur[key % 3]}} border text-white">Recette ...</a>
+                            <!-- <a href="#" class="btn btn-{{classeCouleur[key % 3]}} border text-white">Recette ...</a> -->
+                            <a href="{{ path('recetteParNom' , { "nomRecette" : recette.nomRecette }  )}}" 
+                                    class="btn btn-{{classeCouleur[key % 3]}} border text-white">Recette ...</a>
                         </div>
                     </div>
             </div>

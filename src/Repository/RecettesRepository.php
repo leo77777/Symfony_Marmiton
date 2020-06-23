@@ -19,6 +19,38 @@ class RecettesRepository extends ServiceEntityRepository
         parent::__construct($registry, Recettes::class);
     }
 
+    public function getRecetteParPropriete($propriete, $signe, $valeur){
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.' .$propriete. ' ' .$signe.' :val')
+        ->setParameter('val', $valeur)
+        ->getQuery()
+        ->getResult();
+    }
+
+    // //SELECT * FROM `recettes` WHERE nom_recette like '%tarte%'
+    // public function getRecetteParPropriete($propriete, $valeur){
+    //     return $this->createQueryBuilder('a')
+    //     ->andWhere('a.' .$propriete .'=' .':val')
+    //     ->setParameter('val', $valeur)
+    //     ->getQuery()
+    //     ->getResult();
+    // }
+
+    public function countNumberPrintedForCategory($nom)
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql = "SELECT * FROM `recettes` WHERE nom_recette like '%$nom%' ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();      
+        //var_dump($stmt->fetchAll());die;
+        return $stmt->fetchAll();
+
+    }
+
+
+
+
     // /**
     //  * @return Recettes[] Returns an array of Recettes objects
     //  */

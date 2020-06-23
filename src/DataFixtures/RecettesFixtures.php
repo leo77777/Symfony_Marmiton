@@ -799,6 +799,74 @@ class RecettesFixtures extends Fixture
         $commentaire->setRecette($recette10);
         $manager->persist($commentaire);
 
+        //        ***** RECETTE 11 *****
+        $recette11 = new Recettes();
+
+        $compose = new Compose();
+        $compose->setRecette($recette11)
+                ->setIngredient($ingredient7)
+                ->setQteUnePersonne("70g");
+        $manager->persist($compose); 
+        $compose = new Compose();
+        $compose->setRecette($recette11)
+                ->setIngredient($ingredient4)
+                ->setQteUnePersonne("50g");
+        $manager->persist($compose);
+        $compose = new Compose(); 
+        $compose->setRecette($recette11)
+                ->setIngredient($ingredient1)
+                ->setQteUnePersonne("400g");
+        $manager->persist($compose); 
+
+        $recette11->addCategory($categorie5);
+        $recette11->addCategory($categorie1);
+        $recette11->setNomRecette("Tarte au citron");
+        $manager->persist($recette11);
+
+        for ($i = 1; $i <= 10; $i++) {
+                $note = new Note();
+                $note->setNote($faker->numberBetween($min=0, $max=20));
+                $note->setRecette($recette11);
+                $manager->persist($note);                                    
+        }
+
+        $photo = new Photos();
+        $photo->setChampAlternatif('Tarte au citron');
+        $photo->setLien('\images\tarteAuCitron.jpg');
+        $photo->setRecette($recette11);
+        $manager->persist($photo);
+
+        $etape = new Etapes();
+        $etape->setNumEtape(1);
+        $etape->setDescriptionEtape("Laver les citrons. ");
+        $etape->setRecette($recette11);
+        $manager->persist($etape);
+        $etape = new Etapes();
+        $etape->setNumEtape(2);
+        $etape->setDescriptionEtape("Disposer les citrons sur le fond de tarte.");
+        $etape->setRecette($recette11);
+        $manager->persist($etape);
+        $etape = new Etapes();
+        $etape->setNumEtape(3);
+        $etape->setDescriptionEtape("Saupoudrer avec du sucre vanillé et de cannelle.");
+        $etape->setRecette($recette11);
+        $manager->persist($etape);
+
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("houaa!");
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));
+        $commentaire->setValide(true);
+        $commentaire->setPseudo("Vyvy");
+        $commentaire->setRecette($recette11);
+        $manager->persist($commentaire);
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire("a gouter !");
+        $commentaire->setCreatedAt($faker->dateTimeBetween('-30 years', 'now' ));
+        $commentaire->setValide(false);
+        $commentaire->setPseudo("Tina");
+        $commentaire->setRecette($recette11);
+        $manager->persist($commentaire);
+
         $manager->flush();
     }
 }

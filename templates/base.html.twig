@@ -10,7 +10,7 @@
        
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#08374f">
             <a class="navbar-brand" href="#">𝕸𝖔𝖓 𝕸𝖆𝖗𝖒𝖎𝖙𝖔𝖓 <img src="images/resto5.png" style="width:37px" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,28 +22,45 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#">Administration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#">A propos</a>
                 </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <form method="get" action="" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Je cherche une recette ...">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Chercher</button>
                 </form>
             </div>
         </nav>
         
         <main class="container">                
-            <h1 class="border border-white rounded text-white m-2 mt-5 mb-4 p-2 text-center bg-warning" > 
-                {% block monTitre %}<img src="images/resto5.png" style="width:37px" alt=""> 𝔐𝔬𝔫 𝔐𝔞𝔯𝔪𝔦𝔱𝔬𝔫 {% endblock %} </h1>
+            <h1 class="border border-dark rounded-circle text-black mt-5 mb-4 p-2 text-center bg-white" style="width:300px;"> 
+                {% block monTitre %}<img src="images/resto5.png" style="width:77px" alt=""> 𝔐𝔬𝔫 𝔐𝔞𝔯𝔪𝔦𝔱𝔬𝔫 {% endblock %} </h1>
               
             {% block body %}{% endblock %}
         </main>
+
+        <footer>
+                <div class="card text-center">
+                        <div class="card-header">
+                          Featured
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Special title treatment</h5>
+                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                          2 days ago
+                        </div>
+                      </div>
+                {% block footer %}{% endblock %}
+        </footer>
         
         {% block javascripts %}{% endblock %}
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

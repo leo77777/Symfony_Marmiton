@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\RecettesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Recettes;
+use App\Entity\Note;
+use App\Entity\Commentaires;
 
 class RecettesController extends AbstractController
 {
@@ -26,6 +28,45 @@ class RecettesController extends AbstractController
             'classeCouleur' => $classeCouleur 
         ]);
     }
+
+        /**
+     * @Route("/recettes/avis", name="avisUtilisateur")
+     */
+    public function avisUtilisateur( RecettesRepository $repo , Request $request, 
+            Recettes $recette=null)
+    {       
+        $recetteId = $request->request->get('recetteId');
+        $commentaireUser = $request->request->get('commentaire');
+        $noteUser = (int) $request->request->get('note');
+        $pseudoUser = $request->request->get('pseudo');
+
+        $manager = $this->getDoctrine()->getManager();
+        $recetteBdd = $repo->findById($recetteId);
+        
+        $note = new Note();
+        $note->setNote($noteUser);
+        $note->setRecette($recetteBdd[0]);
+
+        $commentaire = new Commentaires();
+        $commentaire->setLibelleCommentaire($commentaireUser);
+        $faker = \Faker\Factory::create('fr_FR');
+        $commentaire->setCreatedAt($faker->dateTimeBetween( '-30 years', 'now'));    
+        $commentaire->setValide(false);
+        $commentaire->setPseudo($pseudoUser);
+        $commentaire->setRecette($recetteBdd[0]);
+
+        $manager->persist($note);
+        $manager->persist($commentaire);
+        $manager->flush();
+
+        $recettes = $repo->findAll();
+
+        $classeCouleur = array( "success", "danger", "warning");
+        return $this->render('recettes/liste.html.twig', [
+            'recettes' => $recettes,
+            'classeCouleur' => $classeCouleur 
+        ]);
+    } 
 
     /**
      * @Route("/recettes/listeMotCle", name="rechercheRecettesParMotCle")
@@ -66,6 +107,7 @@ class RecettesController extends AbstractController
         for ($i=0; $i < count($recettes[0]->getNotes()) ; $i++) { 
              $noteGlobale = $noteGlobale + $recettes[0]->getNotes()[$i]->getNote();
         }
+
         $noteGlobale = $noteGlobale / count($recettes[0]->getNotes());
 
         $classeCouleur = array( "success", "danger", "warning");
@@ -77,5 +119,7 @@ class RecettesController extends AbstractController
         ]);
     }
 
+
+ 
 
 }

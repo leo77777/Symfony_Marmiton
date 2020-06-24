@@ -11,7 +11,7 @@ use App\Entity\Recettes;
 class RecettesController extends AbstractController
 {
     
-        /**
+    /**
      * @Route("/recettes/liste", name="listeRecettes")
      */
     public function index( RecettesRepository $repository)
@@ -28,15 +28,14 @@ class RecettesController extends AbstractController
     }
 
     /**
-     * @Route("/recettes/liste2", name="rechercheRecette2")
+     * @Route("/recettes/listeMotCle", name="rechercheRecettesParMotCle")
      */
-    public function rechercheRecette( RecettesRepository $repo , Request $request, 
+    public function rechercheToutesLesRecettesParMotCle( RecettesRepository $repo , Request $request, 
             Recettes $recette=null)
     {
-
+        $recettes = array();
         $nomRecette =  $request->query->get('nomRecette');
-        $recettesBrut = $repo->countNumberPrintedForCategory($nomRecette);
-        //var_dump($recettesBrut);die;
+        $recettesBrut = $repo->rechercheRecetteParMotCle($nomRecette);
         foreach ($recettesBrut as  $recette) {
             $nomRecette = $recette['nom_recette'];
             $recettesTemp = $repo->getRecetteParPropriete('nomRecette', '=' , $nomRecette);  
@@ -52,22 +51,29 @@ class RecettesController extends AbstractController
     /**
      * @Route("/recettes/{nomRecette}", name="recetteParNom")
      */
-    public function searchRecette(RecettesRepository $repo, $nomRecette)
+    public function rechercheLaRecetteEnQuestion(RecettesRepository $repo, $nomRecette)
     {
         $recettes = array();
         $recette = array();
-        //$recettes = $repo->getRecetteParPropriete('nomRecette' , $nomRecette);
-        $recettesBrut = $repo->countNumberPrintedForCategory($nomRecette);
-        //var_dump($recettesBrut);die;
+        $recettesBrut = $repo->rechercheRecetteParMotCle($nomRecette);
         foreach ($recettesBrut as  $recette) {
             $nomRecette = $recette['nom_recette'];
             $recettesTemp = $repo->getRecetteParPropriete('nomRecette', '=' , $nomRecette);  
             $recettes[] = $recettesTemp[0];
         }
+
+        $noteGlobale = 0;
+        for ($i=0; $i < count($recettes[0]->getNotes()) ; $i++) { 
+             $noteGlobale = $noteGlobale + $recettes[0]->getNotes()[$i]->getNote();
+        }
+        $noteGlobale = $noteGlobale / count($recettes[0]->getNotes());
+
         $classeCouleur = array( "success", "danger", "warning");
-        return $this->render('recettes/liste.html.twig', [
+        return $this->render('recettes/details.html.twig', [
             'recettes' => $recettes,
-            'classeCouleur' => $classeCouleur 
+            'classeCouleur' => $classeCouleur,
+            'noteGlobale' => $noteGlobale 
+            
         ]);
     }
 

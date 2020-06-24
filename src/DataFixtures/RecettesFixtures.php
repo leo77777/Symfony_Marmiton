@@ -114,7 +114,7 @@ class RecettesFixtures extends Fixture
 
         $recette1->addCategory($categorie2)
                  ->addCategory($categorie3)
-                 ->setNomRecette("Mousse d'asperge"); 
+                 ->setNomRecette("Mousse d asperge"); 
 
         $manager->persist($recette1);
         for ($i = 1; $i <= 10; $i++) {

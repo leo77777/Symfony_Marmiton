@@ -36,17 +36,17 @@ class RecettesRepository extends ServiceEntityRepository
     //     ->getResult();
     // }
 
-    public function countNumberPrintedForCategory($nom)
+    public function rechercheRecetteParMotCle($motCle)
     {
         $conn = $this->getEntityManager()
             ->getConnection();
-        $sql = "SELECT * FROM `recettes` WHERE nom_recette like '%$nom%' ";
+        $sql = "SELECT * FROM `recettes` WHERE nom_recette like '%$motCle%' ";
         $stmt = $conn->prepare($sql);
         $stmt->execute();      
         //var_dump($stmt->fetchAll());die;
         return $stmt->fetchAll();
 
-    }
+    }       
 
 
 

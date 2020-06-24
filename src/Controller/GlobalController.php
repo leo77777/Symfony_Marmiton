@@ -15,7 +15,7 @@ class GlobalController extends AbstractController
     {
         $recettesTemp = $repo->findAll();
 
-
+        // Sélectionne 3 recettes de manière aléatoire
         $prem = rand( 0, count($recettesTemp)-1);
         $deus = rand(0, count($recettesTemp)-1) ;
         $trois= rand(0, count($recettesTemp)-1);

@@ -61,6 +61,8 @@ class RecettesController extends AbstractController
         $manager->persist($commentaire);
         $manager->flush();
 
+        $this->addFlash('success' , "Votre commentaire été envoyé.");
+
         $recettes = $repo->findAll();
 
         $classeCouleur = array( "success", "danger", "warning");
@@ -88,7 +90,7 @@ class RecettesController extends AbstractController
         $classeCouleur = array( "success", "danger", "warning");
 
         //  $request->query->get('name')
-        
+
         // On retourne dans la partie Admin si on y était
         if ( (strpos($request->server->get('HTTP_REFERER'), "/admin/recette") )>0 ) {
             return $this->render('admin/admin_recettes/listeAdmin.html.twig', [

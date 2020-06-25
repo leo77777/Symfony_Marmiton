@@ -6,6 +6,7 @@ use App\Repository\RecettesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RecettesRepository::class)
@@ -20,6 +21,12 @@ class Recettes
     private $id;
 
     /**
+     * @Assert\Length( 
+     *   min = 5,
+     *   max = 50,
+     *   minMessage = "Your first name must be at least {{ limit }} characters long",
+     *   maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *  )
      * @ORM\Column(type="string", length=255)
      */
     private $nomRecette;

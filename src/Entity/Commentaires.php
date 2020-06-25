@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentairesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentairesRepository::class)
@@ -18,6 +19,8 @@ class Commentaires
     private $id;
 
     /**
+     * @Assert\NotNull
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $libelleCommentaire;

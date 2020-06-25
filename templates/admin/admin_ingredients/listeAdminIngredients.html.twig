@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SITE DU MON MARMITON{% endblock %}
+
+{% block body %}
+    
+
+    <h2 class="mx-auto text-center bg-danger text-white p-2">ADMINISTRATION</h2>
+
+    {% for message in app.flashes('success') %}
+         <div class="alert alert-success">{{ message }}</div>
+     {% endfor %}
+
+
+    <div class="text-white mx-auto text-center mt-5 mb-3">
+        <a href="{{ path('creationIngredient') }} " 
+            class="btn btn-success border btn-lg p-3">Nouvel ingrédient</a>
+    </div>
+
+    <div class="row mx-auto text-center">
+        {% for key,ingredient in ingredients %}            
+            <div class="col-md-6 col-lg-4 col-xs-12 mt-3 mb-3"> 
+                        <h5>{{ingredient.nomIngredient}} </h5>
+                        <p> {{ingredient.couleur}} </p>
+                        <a href="{{ path('modifIngredient' , { "id" : ingredient.id }  )}}" 
+                                class="btn btn-warning border m-2">Modifier</a>
+                        <form method="post" class="col m-2  mx-auto text-center" action="{{ path('supIngredient' , {'id':ingredient.id}) }}" 
+                            onsubmit="return confirm('Voulez vous vraiment supprimer ?')" >
+                            <input type="hidden" name="_method" value="SUP">
+                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ ingredient.id) }}">
+                            <input type="submit" class="btn btn-danger border" value="Supprimer">
+                        </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

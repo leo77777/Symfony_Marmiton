@@ -88,7 +88,7 @@ class AdminRecettesController extends AbstractController
 
             $manager->remove($recette);
             $manager->flush();
-            $this->addFlash('success' , "L action a été effectuée");
+            $this->addFlash('success' , "La recette a bien été supprimée.");
             return $this->redirectToRoute("adminRecettes");
        }
     }

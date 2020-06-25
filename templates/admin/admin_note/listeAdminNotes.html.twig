@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SITE DU MON MARMITON{% endblock %}
+
+{% block body %}
+    
+
+    <h2 class="mx-auto text-center bg-danger text-white p-2">ADMINISTRATION</h2>
+
+    {% for message in app.flashes('success') %}
+         <div class="alert alert-success">{{ message }}</div>
+     {% endfor %}
+
+
+    <div class="text-white mx-auto text-center mt-5 mb-3">
+        <a href="{{ path('creationNote') }} " 
+            class="btn btn-success border btn-lg p-3">Nouvelle note</a>
+    </div>
+
+    <div class="row mx-auto text-center">
+        {% for key, note in notes %}            
+            <div class="col-md-6 col-lg-4 col-xs-12 mt-3 mb-3"> 
+                        <h5>{{note.recette.nomRecette}} </h5>
+                        <p> {{note.note}} </p>
+                        <a href="{{ path('modifNote' , { "id" : note.id }  )}}" 
+                                class="btn btn-warning border m-2">Modifier</a>
+                        <form method="post" class="col m-2  mx-auto text-center" action="{{ path('supNote' , {'id':note.id}) }}" 
+                            onsubmit="return confirm('Voulez vous vraiment supprimer ?')" >
+                            <input type="hidden" name="_method" value="SUP">
+                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ note.id) }}">
+                            <input type="submit" class="btn btn-danger border" value="Supprimer">
+                        </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

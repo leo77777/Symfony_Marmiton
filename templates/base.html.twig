@@ -26,9 +26,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('listeRecettes')}}">Liste des recettes</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Administration</a>
-                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Administration
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ path('adminRecettes')}}">Liste des recettes</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>                  
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
@@ -53,7 +61,7 @@
                     <div class="col-md-6 col-xs-12 col-12">
                             <div class="card-body  text-muted text-center">
                                     <a href="#" class="btn btn-danger">Nous contacter</a>
-                                    <div><a href="mailto:support@example.com" class="contact-link red"> support@example.com </a></div>
+                                    <div><a href="mailto:support@marmiton.com" class="contact-link red"> support@marmiton.com </a></div>
                                     <div><a href="tel:0121234" class="contact-link">(123) 456-789</a></div>
                                 </div>
                     </div>

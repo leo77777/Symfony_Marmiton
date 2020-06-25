@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification de la recette{% endblock %}
+
+{% block body %}
+
+    <h2 class="mx-auto text-center bg-danger text-white p-2 mb-5">ADMINISTRATION</h2>
+
+    {{ form_start(form) }}
+         {{ form_widget(form) }}
+         <input type="submit" value="valider" class="btn btn-success m-4 p-2">
+         <button type="submit" class="btn btn-warning text-white"><a href="{{ path('adminRecettes')}}"
+            class="text-white">Annuler</a></button>
+    {{ form_end(form) }}
+{% endblock %}

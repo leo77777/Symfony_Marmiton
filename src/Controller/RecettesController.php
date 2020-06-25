@@ -14,6 +14,7 @@ class RecettesController extends AbstractController
 {
     
     /**
+     * Methode permettant de lister toutes les recettes
      * @Route("/recettes/liste", name="listeRecettes")
      */
     public function index( RecettesRepository $repository)
@@ -29,7 +30,8 @@ class RecettesController extends AbstractController
         ]);
     }
 
-        /**
+    /**
+     * Methode pour ajouter un avis d'un utilisateur à une recette
      * @Route("/recettes/avis", name="avisUtilisateur")
      */
     public function avisUtilisateur( RecettesRepository $repo , Request $request, 
@@ -69,6 +71,7 @@ class RecettesController extends AbstractController
     } 
 
     /**
+     * Methode permettant de rechercher toutes les recette associées à un mot clé
      * @Route("/recettes/listeMotCle", name="rechercheRecettesParMotCle")
      */
     public function rechercheToutesLesRecettesParMotCle( RecettesRepository $repo , Request $request, 
@@ -83,13 +86,26 @@ class RecettesController extends AbstractController
             $recettes[] = $recettesTemp[0];
         }
         $classeCouleur = array( "success", "danger", "warning");
-        return $this->render('recettes/liste.html.twig', [
-            'recettes' => $recettes,
-            'classeCouleur' => $classeCouleur 
-        ]);
+
+        //  $request->query->get('name')
+        
+        // On retourne dans la partie Admin si on y était
+        if ( (strpos($request->server->get('HTTP_REFERER'), "/admin/recette") )>0 ) {
+            return $this->render('admin/admin_recettes/listeAdmin.html.twig', [
+                'recettes' => $recettes,
+                'classeCouleur' => $classeCouleur 
+            ]);
+        }else{
+            return $this->render('recettes/liste.html.twig', [
+                'recettes' => $recettes,
+                'classeCouleur' => $classeCouleur 
+            ]);
+        }        
     }
 
     /**
+     * Methode permettant de retrouver une recette à partir de son nom
+     *  ainsi que sa note
      * @Route("/recettes/{nomRecette}", name="recetteParNom")
      */
     public function rechercheLaRecetteEnQuestion(RecettesRepository $repo, $nomRecette)
@@ -108,7 +124,9 @@ class RecettesController extends AbstractController
              $noteGlobale = $noteGlobale + $recettes[0]->getNotes()[$i]->getNote();
         }
 
-        $noteGlobale = $noteGlobale / count($recettes[0]->getNotes());
+        if($noteGlobale != 0){
+            $noteGlobale = $noteGlobale / count($recettes[0]->getNotes());
+        }
 
         $classeCouleur = array( "success", "danger", "warning");
         return $this->render('recettes/details.html.twig', [

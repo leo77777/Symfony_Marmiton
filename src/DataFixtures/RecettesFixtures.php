@@ -95,6 +95,8 @@ class RecettesFixtures extends Fixture
           
         //        ***** RECETTE 1 *****
         $recette1 = new Recettes();
+        $recette1->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette1)
@@ -170,6 +172,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 2 *****
         $recette2 = new Recettes();
+        $recette2->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette2)
@@ -244,6 +248,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 3 *****
         $recette3= new Recettes();
+        $recette3->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette3)
@@ -316,6 +322,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 4 *****
         $recette4 = new Recettes();
+        $recette4->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette4)
@@ -389,6 +397,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 5 *****
         $recette5 = new Recettes();
+        $recette5->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette5)
@@ -463,6 +473,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 6 *****
         $recette6 = new Recettes();
+        $recette6->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette6)
@@ -527,6 +539,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 7 *****
         $recette7 = new Recettes();
+        $recette7->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette7)
@@ -596,6 +610,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 8 *****
         $recette8 = new Recettes();
+        $recette8->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette8)
@@ -665,6 +681,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 9 *****
         $recette9 = new Recettes();
+        $recette9->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette9)
@@ -734,6 +752,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 10 *****
         $recette10 = new Recettes();
+        $recette10->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette10)
@@ -801,6 +821,8 @@ class RecettesFixtures extends Fixture
 
         //        ***** RECETTE 11 *****
         $recette11 = new Recettes();
+        $recette11->setDescription("Une bonne recette pour cuire un légume disponible toute l'année et pas cher. 
+        En fonction des carottes le temps de cuisson est allongé à 40 - 45 minute");
 
         $compose = new Compose();
         $compose->setRecette($recette11)

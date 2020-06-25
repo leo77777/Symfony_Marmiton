@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SITE DU MON MARMITON{% endblock %}
+
+{% block body %}
+    
+
+    <h2 class="mx-auto text-center bg-danger text-white p-2">ADMINISTRATION</h2>
+
+    <div class="text-white mx-auto text-center mt-5 mb-3">
+        <a href="{{ path('creationRecette') }} " 
+            class="btn btn-success border btn-lg p-3">Nouvelle recette</a>
+    </div>
+
+    <div class="row mx-auto text-center">
+        {% for key,recette in recettes %}            
+            <div class="col-md-6 col-lg-4 col-xs-12 mt-3 mb-3">
+                <div class="card text-white bg-{{classeCouleur[key % 3]}} m-1" style="width: 18rem;">
+                    {% for photo in recette.photos %}
+                        <img src="{{photo.lien}}" class="card-img-top" style="height:200px" alt="{{photo.champAlternatif}}">
+                    {% endfor %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{recette.nomRecette}} </h5>
+                        <a href="{{ path('modifRecette' , { "id" : recette.id }  )}}" 
+                                class="btn border text-white m-2">Modifier</a>
+                        <form method="post" class="col m-2  mx-auto text-center" action="{{ path('supRecette' , {'id':recette.id}) }}" 
+                            onsubmit="return confirm('Voulez vous vraiment supprimer ?')" >
+                            <input type="hidden" name="_method" value="SUP">
+                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ recette.id) }}">
+                            <input type="submit" class="btn border text-white" value="Supprimer">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

@@ -35,10 +35,10 @@ class AdminNoteController extends AbstractController
         if ($note == null) {
             $note = new Note();
         }
-        
+
         $manager = $this->getDoctrine()->getManager();
         $form = $this->createForm(NoteType::class, $note);
-        dd($note);
+
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {

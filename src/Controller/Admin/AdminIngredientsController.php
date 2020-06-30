@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminIngredientsController extends AbstractController
 {
+
+   
     /**
      * @Route("/adminIngredient/ingredients", name="adminIngredients")
      */
@@ -25,6 +27,8 @@ class AdminIngredientsController extends AbstractController
             'classeCouleur' => $classeCouleur 
         ]);
     }
+
+
 
     /**
      * @Route("/adminIngredient/creation", name="creationIngredient")
@@ -66,4 +70,15 @@ class AdminIngredientsController extends AbstractController
             return $this->redirectToRoute("adminIngredients");
        }
     }
+
+    /**     
+    * @Route("/adminIngredient", name="adminRecetteIngredient")
+     */
+    public function adminRecetteIngredient( Request $request)
+    {
+            dd('ici');
+            return $this->redirectToRoute("adminIngredients");
+    }
+
+
 }

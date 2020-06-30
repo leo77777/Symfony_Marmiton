@@ -1,0 +1,6 @@
+App\Entity\Utilisateur:
+  user{1..10}:
+    email: <email()>
+    password: "0000"
+    pseudo: "rere"
+    valide: true

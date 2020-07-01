@@ -1,0 +1,5 @@
+App\Entity\VerificationCode:
+  code:
+    code: "98765"
+    description: Code de test
+    expire_at: <dateTime("+1 month")>

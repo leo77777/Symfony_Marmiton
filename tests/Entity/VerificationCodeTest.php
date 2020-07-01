@@ -11,48 +11,45 @@ use Liip\TestFixturesBundle\Test\FixturesTrait;
 class VerificationCodeTest  extends KernelTestCase
 {
     use FixturesTrait;
-    
-    public function getEntity() :VerificationCode {
-       return (new VerificationCode())
-                ->setCode('12345')
-                ->setDescription('description du test')
-                ->setExpireAt(new \DateTime());
-    }
-    
-    public function testValidEntity(){
-        $code = $this->getEntity();
+
+    public function assertHasErrors(VerificationCode $code, int $number = 0){
         self::bootKernel();
         $errors = self::$container->get('validator')->validate($code);
-        $this->assertCount(0, $errors);
+
+        $messages = [];
+        foreach ($errors as  $error) {
+           $messages[] = $error->getPropertyPath() ."=>" .$error->getMessage();
+        }
+
+        $this->assertCount($number, $errors, implode(', ' , $messages));
+    }
+
+    public function getEntity() :VerificationCode {
+        return (new VerificationCode())
+                 ->setCode('12345')
+                 ->setDescription('description du test')
+                 ->setExpireAt(new \DateTime());
+     }
+        
+    public function testValidEntity(){
+        $this->assertHasErrors($this->getEntity(), 0);
     }
 
     public function testInvalidCodeEntity(){
-        $code = $this->getEntity()->setCode('1a456');
-        self::bootKernel();
-        $errors = self::$container->get('validator')->validate($code);
-        $this->assertCount(1, $errors);
+        $this->assertHasErrors( $this->getEntity()->setCode('1a456'), 1);
     } 
 
     public function testInvalidCodeBlankEntity(){
-        $code = $this->getEntity()->setCode('');
-        self::bootKernel();
-        $errors = self::$container->get('validator')->validate($code);
-        $this->assertCount(1, $errors);
+        $this->assertHasErrors( $this->getEntity()->setCode(''), 1);
     } 
 
     public function testInvalidDescriptionEntity(){
-        $code = $this->getEntity()->setDescription('');
-        self::bootKernel();
-        $errors = self::$container->get('validator')->validate($code);
-        $this->assertCount(1, $errors);
+        $this->assertHasErrors( $this->getEntity()->setDescription(''), 1);
     } 
 
     // Ci dessous, test que un code ne soit pas utilisé plusieurs fois
     public function testInvalidUsedTest(){
         $this->loadFixtureFiles([ dirname( __DIR__ ) .'/Fixtures/VerificationCodeFixture.yaml']);
-        $code = $this->getEntity()->setCode('98765');
-        self::bootKernel();
-        $errors = self::$container->get('validator')->validate($code);
-        $this->assertCount(1, $errors);
+        $this->assertHasErrors($this->getEntity()->setCode('98765'), 1);
     } 
 }

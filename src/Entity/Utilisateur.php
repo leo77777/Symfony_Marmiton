@@ -22,7 +22,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nom;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -64,14 +64,14 @@ class Utilisateur
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getUsername(): ?string
     {
-        return $this->nom;
+        return $this->username;
     }
 
-    public function setNom(?string $nom): self
+    public function setUsername(?string $username): self
     {
-        $this->nom = $nom;
+        $this->username = $username;
 
         return $this;
     }
